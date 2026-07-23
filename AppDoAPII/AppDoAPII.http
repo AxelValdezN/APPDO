@@ -1,0 +1,6 @@
+@AppDoAPII_HostAddress = http://localhost:5116
+
+GET {{AppDoAPII_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

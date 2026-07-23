@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="AppDoMAUI.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="{StaticResource AppBackground}">
+
+    <ScrollView>
+        <Grid
+            Padding="24"
+            MinimumHeightRequest="650">
+
+            <Border
+                MaximumWidthRequest="430"
+                Padding="30"
+                Stroke="{StaticResource AppBorder}"
+                StrokeThickness="1"
+                BackgroundColor="{StaticResource AppCard}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <Border.Shadow>
+                    <Shadow
+                        Opacity="0.18"
+                        Radius="18"
+                        Offset="0,8" />
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="18">
+
+                    <Border
+                        WidthRequest="78"
+                        HeightRequest="78"
+                        Padding="10"
+                        StrokeThickness="0"
+                        BackgroundColor="{StaticResource AppPrimary}"
+                        HorizontalOptions="Center">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="39" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            Text="✓"
+                            FontSize="38"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+
+                    </Border>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label
+                            Text="APP-DO"
+                            Style="{StaticResource AuthTitleStyle}" />
+
+                        <Label
+                            Text="Recordatorios Inteligentes"
+                            Style="{StaticResource AuthSubtitleStyle}" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="7">
+                        <Label
+                            Text="Correo electrónico"
+                            Style="{StaticResource AuthFieldLabelStyle}" />
+
+                        <Border
+                            Stroke="{StaticResource AppBorder}"
+                            StrokeThickness="1"
+                            BackgroundColor="White">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Entry
+                                x:Name="EmailEntry"
+                                Placeholder="admin@appdo.com"
+                                Keyboard="Email"
+                                ReturnType="Next"
+                                Style="{StaticResource AuthEntryStyle}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="7">
+                        <Label
+                            Text="Contraseña"
+                            Style="{StaticResource AuthFieldLabelStyle}" />
+
+                        <Border
+                            Stroke="{StaticResource AppBorder}"
+                            StrokeThickness="1"
+                            BackgroundColor="White">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Entry
+                                x:Name="PasswordEntry"
+                                Placeholder="Escribe tu contraseña"
+                                IsPassword="True"
+                                ReturnType="Done"
+                                Style="{StaticResource AuthEntryStyle}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Label
+                        Text="¿Olvidaste tu contraseña?"
+                        TextColor="{StaticResource AppPrimary}"
+                        FontSize="13"
+                        HorizontalOptions="End" />
+
+                    <Button
+                        x:Name="LoginButton"
+                        Text="Iniciar sesión"
+                        Clicked="OnLoginClicked"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+
+                    <ActivityIndicator
+                        x:Name="LoadingIndicator"
+                        IsVisible="False"
+                        IsRunning="False"
+                        HorizontalOptions="Center"
+                        Color="{StaticResource AppPrimary}" />
+
+                    <Label
+                        x:Name="MessageLabel"
+                        Style="{StaticResource AuthMessageStyle}" />
+
+                    <Grid
+                        ColumnDefinitions="*,Auto,*"
+                        ColumnSpacing="12">
+
+                        <BoxView
+                            Grid.Column="0"
+                            HeightRequest="1"
+                            VerticalOptions="Center"
+                            Color="{StaticResource AppBorder}" />
+
+                        <Label
+                            Grid.Column="1"
+                            Text="o"
+                            TextColor="{StaticResource AppTextSecondary}" />
+
+                        <BoxView
+                            Grid.Column="2"
+                            HeightRequest="1"
+                            VerticalOptions="Center"
+                            Color="{StaticResource AppBorder}" />
+                    </Grid>
+
+                    <Button
+                        Text="Crear cuenta"
+                        Clicked="OnRegisterClicked"
+                        Style="{StaticResource SecondaryButtonStyle}" />
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

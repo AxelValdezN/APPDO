@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="AppDoMAUI.Views.RegisterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="{StaticResource AppBackground}">
+
+    <ScrollView>
+        <Grid
+            Padding="24"
+            MinimumHeightRequest="760">
+
+            <Border
+                MaximumWidthRequest="430"
+                Padding="30"
+                Stroke="{StaticResource AppBorder}"
+                StrokeThickness="1"
+                BackgroundColor="{StaticResource AppCard}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <Border.Shadow>
+                    <Shadow
+                        Opacity="0.18"
+                        Radius="18"
+                        Offset="0,8" />
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Label
+                        Text="Crear cuenta"
+                        Style="{StaticResource AuthTitleStyle}" />
+
+                    <Label
+                        Text="Comienza a organizar tus pagos y recordatorios"
+                        Style="{StaticResource AuthSubtitleStyle}" />
+
+                    <VerticalStackLayout Spacing="7">
+                        <Label
+                            Text="Nombre completo"
+                            Style="{StaticResource AuthFieldLabelStyle}" />
+
+                        <Border
+                            Stroke="{StaticResource AppBorder}"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Entry
+                                x:Name="NameEntry"
+                                Placeholder="Tu nombre"
+                                ReturnType="Next"
+                                Style="{StaticResource AuthEntryStyle}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="7">
+                        <Label
+                            Text="Correo electrónico"
+                            Style="{StaticResource AuthFieldLabelStyle}" />
+
+                        <Border
+                            Stroke="{StaticResource AppBorder}"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Entry
+                                x:Name="EmailEntry"
+                                Placeholder="correo@ejemplo.com"
+                                Keyboard="Email"
+                                ReturnType="Next"
+                                Style="{StaticResource AuthEntryStyle}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="7">
+                        <Label
+                            Text="Contraseña"
+                            Style="{StaticResource AuthFieldLabelStyle}" />
+
+                        <Border
+                            Stroke="{StaticResource AppBorder}"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Entry
+                                x:Name="PasswordEntry"
+                                Placeholder="Mínimo 6 caracteres"
+                                IsPassword="True"
+                                ReturnType="Next"
+                                Style="{StaticResource AuthEntryStyle}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="7">
+                        <Label
+                            Text="Confirmar contraseña"
+                            Style="{StaticResource AuthFieldLabelStyle}" />
+
+                        <Border
+                            Stroke="{StaticResource AppBorder}"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Entry
+                                x:Name="ConfirmPasswordEntry"
+                                Placeholder="Repite tu contraseña"
+                                IsPassword="True"
+                                ReturnType="Done"
+                                Style="{StaticResource AuthEntryStyle}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Button
+                        x:Name="RegisterButton"
+                        Text="Registrarse"
+                        Clicked="OnRegisterClicked"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+
+                    <ActivityIndicator
+                        x:Name="LoadingIndicator"
+                        IsVisible="False"
+                        IsRunning="False"
+                        Color="{StaticResource AppPrimary}"
+                        HorizontalOptions="Center" />
+
+                    <Label
+                        x:Name="MessageLabel"
+                        Style="{StaticResource AuthMessageStyle}" />
+
+                    <Button
+                        Text="Volver al inicio de sesión"
+                        Clicked="OnBackToLoginClicked"
+                        Style="{StaticResource SecondaryButtonStyle}" />
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

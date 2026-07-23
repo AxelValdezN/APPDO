@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="AppDoAPII/AppDoAPII.csproj" Id="fa127037-3729-45c5-9f0c-fd738a92d383" />
+  <Project Path="AppDoMAUI/AppDoMAUI.csproj" Id="745895fb-3668-4c09-ad05-c8453b123ba5">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
