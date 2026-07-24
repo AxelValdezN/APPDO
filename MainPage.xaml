@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MIO.MainPage"
+             Title="Calendario"
+             BackgroundColor="#F8FAFC">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, *" Padding="20,15" RowSpacing="15">
+
+        <!-- 1. ENCABEZADO Y NAVEGACIÓN -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto">
+            <Button Grid.Column="0" Text="❮" Clicked="OnMesAnteriorClicked" FontSize="18" FontAttributes="Bold" TextColor="#1E293B" BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" />
+            <Label Grid.Column="1" x:Name="LblMesAnio" Text="Julio 2026" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#0F172A" />
+            <Button Grid.Column="2" Text="❯" Clicked="OnMesSiguienteClicked" FontSize="18" FontAttributes="Bold" TextColor="#1E293B" BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" />
+        </Grid>
+
+        <!-- 2. DÍAS DE LA SEMANA -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="2">
+            <Label Grid.Column="0" Text="Lun" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#64748B" FontSize="13" />
+            <Label Grid.Column="1" Text="Mar" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#64748B" FontSize="13" />
+            <Label Grid.Column="2" Text="Mié" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#64748B" FontSize="13" />
+            <Label Grid.Column="3" Text="Jue" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#64748B" FontSize="13" />
+            <Label Grid.Column="4" Text="Vie" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#64748B" FontSize="13" />
+            <Label Grid.Column="5" Text="Sáb" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#64748B" FontSize="13" />
+            <Label Grid.Column="6" Text="Dom" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#64748B" FontSize="13" />
+        </Grid>
+
+        <!-- 3. CALENDARIO CON PUNTOS -->
+        <CollectionView Grid.Row="2" 
+                        ItemsSource="{Binding DiasMes}" 
+                        SelectionMode="Single"
+                        SelectionChanged="OnDiaSeleccionado">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="7" VerticalItemSpacing="10" HorizontalItemSpacing="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Spacing="4" HorizontalOptions="Center" VerticalOptions="Start">
+                        <Border WidthRequest="36" HeightRequest="36" StrokeShape="RoundRectangle 18" StrokeThickness="0" BackgroundColor="{Binding ColorFondo}">
+                            <Label Text="{Binding NumeroDia}" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{Binding ColorTexto}" />
+                        </Border>
+                        <HorizontalStackLayout BindableLayout.ItemsSource="{Binding PuntosEstado}" Spacing="2" HorizontalOptions="Center" HeightRequest="6">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Border WidthRequest="5" HeightRequest="5" StrokeShape="RoundRectangle 2.5" StrokeThickness="0" BackgroundColor="{Binding .}" />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- 4. LEYENDA INFERIOR -->
+        <Grid Grid.Row="3" ColumnDefinitions="*, *, *" ColumnSpacing="10">
+            <Border Grid.Column="0" BackgroundColor="#D1FAE5" StrokeThickness="0" StrokeShape="RoundRectangle 15" Padding="8">
+                <Label Text="✓ Pagado" TextColor="#065F46" FontAttributes="Bold" FontSize="12" HorizontalOptions="Center"/>
+            </Border>
+            <Border Grid.Column="1" BackgroundColor="#FEF3C7" StrokeThickness="0" StrokeShape="RoundRectangle 15" Padding="8">
+                <Label Text="✓ Próximo" TextColor="#92400E" FontAttributes="Bold" FontSize="12" HorizontalOptions="Center"/>
+            </Border>
+            <Border Grid.Column="2" BackgroundColor="#FEE2E2" StrokeThickness="0" StrokeShape="RoundRectangle 15" Padding="8">
+                <Label Text="✓ Atrasado" TextColor="#991B1B" FontAttributes="Bold" FontSize="12" HorizontalOptions="Center"/>
+            </Border>
+        </Grid>
+
+        <!-- 5. TÍTULO DE LA LISTA -->
+        <Label Grid.Row="4" 
+               x:Name="LblTituloLista" 
+               Text="Pagos del mes" 
+               FontSize="16" 
+               FontAttributes="Bold" 
+               TextColor="#0F172A" 
+               Margin="0,5,0,0" />
+
+        <!-- 6. LISTADO COMPLETO DE PAGOS DEL MES -->
+        <CollectionView Grid.Row="5" ItemsSource="{Binding PagosDelMes}">
+            <CollectionView.EmptyView>
+                <Label Text="No hay pagos registrados en este mes" TextColor="Gray" FontSize="13" HorizontalOptions="Center" Margin="0,20" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeShape="RoundRectangle 12" 
+                            StrokeThickness="1" 
+                            Stroke="{Binding ColorEstado}" 
+                            BackgroundColor="{Binding ColorFondoTarjeta}" 
+                            Margin="0,0,0,10" 
+                            Padding="12">
+                        <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="12">
+                            <!-- Indicador Lateral -->
+                            <Border Grid.Column="0" WidthRequest="4" HeightRequest="36" StrokeShape="RoundRectangle 2" BackgroundColor="{Binding ColorEstado}" StrokeThickness="0"/>
+
+                            <!-- Información del Pago -->
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Text="{Binding Concepto}" FontAttributes="Bold" FontSize="14" TextColor="#0F172A" />
+                                <Label Text="{Binding FechaFormateada}" FontSize="12" TextColor="#64748B" />
+                            </VerticalStackLayout>
+
+                            <!-- Monto y Estado -->
+                            <VerticalStackLayout Grid.Column="2" Spacing="2" HorizontalOptions="End" VerticalOptions="Center">
+                                <Label Text="{Binding Monto, StringFormat='${0:N2}'}" FontSize="15" FontAttributes="Bold" TextColor="#0F172A" HorizontalOptions="End" />
+                                <Label Text="{Binding Estado}" FontSize="11" FontAttributes="Bold" TextColor="{Binding ColorEstado}" HorizontalOptions="End" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
